@@ -321,10 +321,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
   </div>
 </div>
 
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>emailjs.init("JX7hNQ9oP2mKvLtR8wYz");</script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -400,30 +396,16 @@ document.getElementById('quote-form').addEventListener('submit', async function(
   try {
     if (window._fbPush) await window._fbPush(data);
 
-    // Enviar notificación por email via EmailJS
+    // Enviar a Google Apps Script → guarda en Sheets + envía emails a los 3 correos
     try {
-      await emailjs.send('wiljo_service', 'wiljo_cotizacion', {
-        nombre:        data.nombre || 'Sin nombre',
-        empresa:       data.empresa || 'N/A',
-        telefono:      data.telefono || 'N/A',
-        correo_cliente: data.correo || 'N/A',
-        tipo_evento:   data.tipo_evento || 'N/A',
-        fecha_evento:  data.fecha || 'N/A',
-        invitados:     data.invitados || 'N/A',
-        carritos:      data.carritos || '1',
-        tipo_servicio: data.tipo_servicio || 'N/A',
-        espacio:       data.espacio || 'N/A',
-        lugar_nombre:  data.lugar_nombre || 'N/A',
-        lugar_dir:     data.lugar_direccion || 'N/A',
-        vestimenta:    data.vestimenta || 'N/A',
-        como_conocio:  data.como_conocio || 'N/A',
-        notas:         data.notas || 'Sin notas',
-        timestamp:     new Date().toLocaleString('es-CO', {timeZone:'America/Bogota'}),
-        firebase_link: 'https://console.firebase.google.com/project/wiljo-coffee/database/wiljo-coffee-default-rtdb/data/~2Fcotizaciones',
-        sheets_link:   'https://docs.google.com/spreadsheets/d/SHEETS_ID_HERE'
+      await fetch('https://script.google.com/macros/s/AKfycbx6NqS2AxWAzD5Ss_L_jCor-Sx-0vG0eCQA9KomT54oCKXaQEWEZNrPxrslmrl5SjKtzQ/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
       });
-    } catch(emailErr) {
-      console.warn('Email notification failed (non-blocking):', emailErr);
+    } catch(gasErr) {
+      console.warn('Google Script notification failed (non-blocking):', gasErr);
     }
 
     this.style.display = 'none';
