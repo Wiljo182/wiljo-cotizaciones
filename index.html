@@ -56,8 +56,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .radio-option{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px;border-radius:4px;border:1.5px solid var(--border);font-size:13px;color:var(--dark);transition:border-color .2s,background .2s}
 .radio-option:hover{border-color:var(--gold);background:rgba(200,144,42,.04)}
 .radio-option input{accent-color:var(--gold)}
-.info-box{background:var(--dark);color:var(--white);border-radius:6px;padding:14px 18px;font-size:13px;margin-top:10px;line-height:1.5;display:flex;gap:10px;align-items:flex-start;overflow:hidden;width:100%}
-.info-box span:first-child{color:var(--gold-light);font-size:16px;flex-shrink:0}.info-box span:last-child{min-width:0;word-break:break-word;overflow-wrap:break-word;flex:1}
+.info-box{background:var(--dark);color:var(--white);border-radius:6px;padding:14px 18px;font-size:13px;margin-top:10px;line-height:1.5;display:block;width:100%;box-sizing:border-box;overflow:hidden}
+.info-box .info-icon{color:var(--gold-light);font-size:16px;margin-right:8px;vertical-align:middle}.info-box .info-text{word-break:break-word;overflow-wrap:break-word;white-space:normal;display:inline}
 .progress{display:flex;gap:8px;justify-content:center;padding:32px 0 0;margin-bottom:40px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all .3s}
 .dot.active{background:var(--gold);width:24px;border-radius:3px}
@@ -78,8 +78,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
   .hero h1{font-size:28px}
   .container{padding:32px 14px 60px}
   .section-title{font-size:20px}
-  .info-box{flex-direction:column;gap:6px;font-size:12px}
-  .info-box span{font-size:14px}
+
+
   .toggle-btn{min-width:0;font-size:12px;padding:10px 10px}
   .two-col{grid-template-columns:1fr}
   .service-cards{grid-template-columns:1fr}
@@ -177,10 +177,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
           <div class="hint" id="carrito-hint"></div>
         </div>
       </div>
-      <div class="info-box">
-        <span>&#9749;</span>
-        <span>Para eventos de <strong>m&aacute;s de 150 personas</strong> recomendamos agregar un segundo carrito para tiempos de espera cortos y mejor experiencia.</span>
-      </div>
+      <div class="info-box"><span class="info-icon">&#9749;</span><span class="info-text">Para eventos de <strong>m&aacute;s de 150 personas</strong> recomendamos agregar un segundo carrito para tiempos de espera cortos y mejor experiencia.</span></div>
       <div style="height:20px"></div>
       <div class="field">
         <label>&iquest;Espacio abierto o recinto cerrado?</label>
